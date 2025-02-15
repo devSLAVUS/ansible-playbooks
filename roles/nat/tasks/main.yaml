@@ -5,9 +5,6 @@
     state: present
   notify: Apply sysctl
 
-- name: Применяем IP forwarding
-  command: sysctl -p
-
 - name: Добавляем NAT для внутренней сети
   iptables:
     table: nat

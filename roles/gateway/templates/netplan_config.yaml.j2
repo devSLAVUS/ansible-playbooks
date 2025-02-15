@@ -1,0 +1,16 @@
+network:
+  version: 2
+  ethernets:
+    {{ public_iface }}:
+      dhcp4: true
+      dhcp6: false
+    {{ private_iface }}:
+      addresses:
+        - {{ ansible_host }}/24
+      nameservers:
+        addresses:
+          - 8.8.8.8
+          - 8.8.4.4
+      routes:
+        - to: default
+          via: {{ gateway_ip }}

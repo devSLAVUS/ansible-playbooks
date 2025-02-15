@@ -1,0 +1,7 @@
+base_packages:
+  - vim
+  - curl
+  - git
+  - htop
+  - net-tools
+  - docker.io

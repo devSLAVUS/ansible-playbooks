@@ -1,14 +1,9 @@
 - name: Устанавливаем базовые пакеты
   apt:
-    name:
-      - vim
-      - curl
-      - git
-      - htop
-      - net-tools
-      - docker.io
+    name: "{{ item }}"
     state: present
     update_cache: yes
+  loop: "{{ base_packages }}"
 
 - name: Устанавливаем правильный timezone
   timezone:
