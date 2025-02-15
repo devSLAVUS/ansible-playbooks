@@ -1,0 +1,6 @@
+private_iface: eth1
+public_iface: eth0
+gateway_ip: 192.168.0.4
+dns_servers:
+  - 8.8.8.8
+  - 8.8.4.4

@@ -1,0 +1,6 @@
+- name: Настройка NAT на vm1
+  hosts: router
+  become: true
+  roles:
+    - nat
+

@@ -1,0 +1,5 @@
+- name: Настроить шлюз на worker-нодах
+  hosts: workers  # Запуск только на vm2 и vm3
+  become: true
+  roles:
+    - gateway  # Вызывает роль gateway
