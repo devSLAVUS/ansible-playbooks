@@ -1,0 +1,5 @@
+- name: Установка и запуск HAProxy в Docker
+  hosts: router
+  become: true
+  roles:
+    - haproxy

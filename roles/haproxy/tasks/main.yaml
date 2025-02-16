@@ -1,0 +1,40 @@
+- name: Создаём каталог для конфигурации HAProxy
+  file:
+    path: /etc/haproxy
+    state: directory
+    mode: "0755"
+
+- name: Создаём директорию для HAProxy runtime файлов
+  file:
+    path: /run/haproxy
+    state: directory
+    mode: "0755"
+
+- name: Разворачиваем конфигурацию HAProxy
+  template:
+    src: haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
+  notify: Restart HAProxy
+
+- name: Запускаем контейнер HAProxy
+  docker_container:
+    name: haproxy
+    image: haproxy:latest
+    state: started
+    restart_policy: always
+    privileged: true
+    user: "root"
+    ports:
+      - "5432:5432"
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - /run/haproxy:/run/haproxy
+      - /var/run:/var/run
+    capabilities:
+      - NET_ADMIN
+      - SYS_ADMIN
+      - NET_BIND_SERVICE
+
+  notify: Restart HAProxy
